@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface SendMessagePort {
 
-    void sendMessage(final String messageName, final Map<String, Object> data);
+    void sendMessage(final String messageName, final String key, final Map<String, Object> data);
 }

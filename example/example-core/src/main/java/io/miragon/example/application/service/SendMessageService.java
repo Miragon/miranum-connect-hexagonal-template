@@ -13,7 +13,7 @@ public class SendMessageService implements SendMessageUseCase {
 
     @Override
     public SendMessageResult sendMessage(SendMessageCommand command) {
-        sendMessagePort.sendMessage(command.getMessage(), null);
+        sendMessagePort.sendMessage(command.getMessage(), "key",  null);
         return new SendMessageResult("answer to: " + command.getMessage());
     }
 }
