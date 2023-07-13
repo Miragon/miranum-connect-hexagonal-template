@@ -1,8 +1,8 @@
 package io.miragon.example.application.service;
 
-import io.miragon.example.application.port.in.DoSomethingCommand;
-import io.miragon.example.application.port.in.DoSomethingResult;
-import io.miragon.example.application.port.in.DoSomethingUseCase;
+import io.miragon.example.application.port.in.dosomething.DoSomethingCommand;
+import io.miragon.example.application.port.in.dosomething.DoSomethingResult;
+import io.miragon.example.application.port.in.dosomething.DoSomethingUseCase;
 
 public class DoSomethingService implements DoSomethingUseCase {
     public DoSomethingResult doSomething(DoSomethingCommand command) {

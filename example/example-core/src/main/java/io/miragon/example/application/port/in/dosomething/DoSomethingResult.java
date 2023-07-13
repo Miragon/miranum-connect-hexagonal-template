@@ -1,4 +1,4 @@
-package io.miragon.example.application.port.in;
+package io.miragon.example.application.port.in.dosomething;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

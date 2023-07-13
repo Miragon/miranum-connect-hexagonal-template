@@ -1,4 +1,4 @@
-package io.miragon.example.application.port.in;
+package io.miragon.example.application.port.in.dosomething;
 
 public interface DoSomethingUseCase {
 
