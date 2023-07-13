@@ -7,7 +7,7 @@ import io.miragon.miranum.connect.worker.api.Worker;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class WorkerAdapter {
+public class MiranumWorkerAdapter {
 
     private final DoSomethingUseCase doSomethingUseCase;
 
