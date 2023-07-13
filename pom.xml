@@ -3,10 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.miragon</groupId>
-    <artifactId>miranum-connect-basic-template</artifactId>
+    <artifactId>miranum-connect-hexagonal-template</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>miranum-connect-basic-template</name>
-    <description>Simplified, beginner-friendly GitHub template for initiating new projects with Miranum. Focused on key features of Miranum Connect - Worker creation, Message correlation, and Process start.</description>
+    <name>miranum-connect-hexagonal-template</name>
+    <description>Beginner-friendly GitHub template for Miranum Connect with Hexagonal Architecture. Simplify your project initiation and leverage the benefits of the Hexagonal Architecture pattern. Create workers, correlate messages, and start processes with ease.</description>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -106,6 +107,10 @@
         </dependency>
         <!-- Camunda 7 -->
     </dependencies>
+
+    <modules>
+        <module>example</module>
+    </modules>
 
     <build>
         <plugins>
