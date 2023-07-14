@@ -3,7 +3,8 @@ package io.miragon.example.application.service;
 import io.miragon.example.application.port.in.sendmessage.SendMessageCommand;
 import io.miragon.example.application.port.in.sendmessage.SendMessageResult;
 import io.miragon.example.application.port.in.sendmessage.SendMessageUseCase;
-import io.miragon.example.application.port.out.SendMessagePort;
+import io.miragon.example.application.port.out.sendmessage.SendMessageOutCommand;
+import io.miragon.example.application.port.out.sendmessage.SendMessagePort;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -13,7 +14,8 @@ public class SendMessageService implements SendMessageUseCase {
 
     @Override
     public SendMessageResult sendMessage(SendMessageCommand command) {
-        sendMessagePort.sendMessage(command.getMessage(), "key",  null);
+        var outCommand = new SendMessageOutCommand(command.getMessage(), "key", null);
+        sendMessagePort.sendMessage(outCommand);
         return new SendMessageResult("answer to: " + command.getMessage());
     }
 }
