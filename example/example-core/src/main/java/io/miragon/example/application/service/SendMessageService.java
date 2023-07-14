@@ -14,8 +14,11 @@ public class SendMessageService implements SendMessageUseCase {
 
     @Override
     public SendMessageResult sendMessage(SendMessageCommand command) {
-        var outCommand = new SendMessageOutCommand(command.getMessage(), "key", null);
+        var outCommand = new SendMessageOutCommand(
+                command.getMessageName(),
+                command.getKey(),
+                command.getData());
         sendMessagePort.sendMessage(outCommand);
-        return new SendMessageResult("answer to: " + command.getMessage());
+        return new SendMessageResult("answer to: " + command.getMessageName());
     }
 }

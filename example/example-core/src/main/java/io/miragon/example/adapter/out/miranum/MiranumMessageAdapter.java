@@ -13,11 +13,10 @@ public class MiranumMessageAdapter implements SendMessagePort {
 
     @Override
     public void sendMessage(SendMessageOutCommand command) {
-        var correlateMessageCommand =
-                new CorrelateMessageCommand(
-                        command.getMessageName(),
-                        command.getKey(),
-                        command.getData());
+        var correlateMessageCommand = new CorrelateMessageCommand(
+                command.getMessageName(),
+                command.getKey(),
+                command.getData());
         messageApi.correlateMessage(correlateMessageCommand);
     }
 }
