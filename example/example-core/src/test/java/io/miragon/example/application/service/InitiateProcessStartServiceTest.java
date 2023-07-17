@@ -6,38 +6,33 @@ import io.miragon.example.application.port.out.startprocess.InitiateProcessStart
 import io.miragon.example.application.port.out.startprocess.InitiateProcessStartPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class InitiateProcessStartServiceTest {
 
     private InitiateProcessStartUseCase initiateProcessStartService;
 
-    @Mock
     private InitiateProcessStartPort initiateProcessStartPort;
 
-    @Captor
     private ArgumentCaptor<InitiateProcessStartOutCommand> outCommandCaptor;
-
-    public InitiateProcessStartServiceTest() {
-        new InitiateProcessStartService(initiateProcessStartPort);
-    }
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        initiateProcessStartPort = mock(InitiateProcessStartPort.class);
+        outCommandCaptor = ArgumentCaptor.forClass(InitiateProcessStartOutCommand.class);
         initiateProcessStartService = new InitiateProcessStartService(initiateProcessStartPort);
     }
 
     @Test
     public void testInitiateProcessStart_Success() {
         String processKey = "my-process";
-        Mockito.doNothing().when(initiateProcessStartPort).initiateProcessStart(Mockito.any());
+        doNothing().when(initiateProcessStartPort).initiateProcessStart(any());
         initiateProcessStartService.initiateProcessStart(new InitiateProcessStartCommand(processKey, Map.of()));
         verify(initiateProcessStartPort).initiateProcessStart(outCommandCaptor.capture());
         InitiateProcessStartOutCommand capturedCommand = outCommandCaptor.getValue();
@@ -48,7 +43,7 @@ public class InitiateProcessStartServiceTest {
     @Test
     public void testInitiateProcessStart_Failure() {
         String processKey = "my-process";
-        Mockito.doThrow(RuntimeException.class).when(initiateProcessStartPort).initiateProcessStart(Mockito.any());
+        doThrow(RuntimeException.class).when(initiateProcessStartPort).initiateProcessStart(any());
         assertThrows(RuntimeException.class, () -> initiateProcessStartService.initiateProcessStart(new InitiateProcessStartCommand(processKey, Map.of())));
         verify(initiateProcessStartPort).initiateProcessStart(outCommandCaptor.capture());
         InitiateProcessStartOutCommand capturedCommand = outCommandCaptor.getValue();

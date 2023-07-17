@@ -7,33 +7,26 @@ import io.miragon.example.application.port.out.sendmessage.SendMessagePort;
 import io.miragon.miranum.connect.message.impl.MessageCorrelationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class SendMessageServiceTest {
 
-
     private SendMessageUseCase sendMessageService;
 
-    @Mock
     private SendMessagePort sendMessagePort;
 
-    @Captor
-    private ArgumentCaptor<SendMessageOutCommand> sendMessageOutCommandArgumentCaptor;
-
-    public SendMessageServiceTest() {
-        MockitoAnnotations.openMocks(this);
-        sendMessageService = new SendMessageService(sendMessagePort);
-    }
+    private ArgumentCaptor<SendMessageOutCommand> sendMessageOutCommandCaptor;
 
     @BeforeEach
-    public void setup() {
-        MockitoAnnotations.openMocks(this);
+    public void setUp() {
+        sendMessagePort = mock(SendMessagePort.class);
+        sendMessageOutCommandCaptor = ArgumentCaptor.forClass(SendMessageOutCommand.class);
         sendMessageService = new SendMessageService(sendMessagePort);
     }
 
@@ -41,10 +34,10 @@ public class SendMessageServiceTest {
     public void testSendMessage_Success() {
         String message = "my-message";
         String correlationKey = "my-correlation-key";
-        Mockito.doNothing().when(sendMessagePort).sendMessage(Mockito.any());
-        sendMessagePort.sendMessage(new SendMessageOutCommand(message, correlationKey, null));
-        verify(sendMessagePort).sendMessage(sendMessageOutCommandArgumentCaptor.capture());
-        SendMessageOutCommand capturedCommand = sendMessageOutCommandArgumentCaptor.getValue();
+        doNothing().when(sendMessagePort).sendMessage(any());
+        sendMessageService.sendMessage(new SendMessageCommand(message, correlationKey, Map.of()));
+        verify(sendMessagePort).sendMessage(sendMessageOutCommandCaptor.capture());
+        SendMessageOutCommand capturedCommand = sendMessageOutCommandCaptor.getValue();
         assertEquals(message, capturedCommand.getMessageName());
         assertEquals(correlationKey, capturedCommand.getKey());
     }
@@ -53,11 +46,11 @@ public class SendMessageServiceTest {
     public void testSendMessage_Failure() {
         String message = "my-message";
         String correlationKey = "my-correlation-key";
-        Mockito.doThrow(MessageCorrelationException.class).when(sendMessagePort).sendMessage(Mockito.any());
+        doThrow(MessageCorrelationException.class).when(sendMessagePort).sendMessage(any());
         assertThrows(MessageCorrelationException.class, () ->
                 sendMessageService.sendMessage(new SendMessageCommand(message, correlationKey, Map.of())));
-        verify(sendMessagePort).sendMessage(sendMessageOutCommandArgumentCaptor.capture());
-        SendMessageOutCommand capturedCommand = sendMessageOutCommandArgumentCaptor.getValue();
+        verify(sendMessagePort).sendMessage(sendMessageOutCommandCaptor.capture());
+        SendMessageOutCommand capturedCommand = sendMessageOutCommandCaptor.getValue();
         assertEquals(message, capturedCommand.getMessageName());
         assertEquals(correlationKey, capturedCommand.getKey());
     }
