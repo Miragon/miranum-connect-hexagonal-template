@@ -9,7 +9,6 @@
     <description>Beginner-friendly GitHub template for Miranum Connect with Hexagonal Architecture. Simplify your project initiation and leverage the benefits of the Hexagonal Architecture pattern. Create workers, correlate messages, and start processes with ease.</description>
     <packaging>pom</packaging>
 
-
     <properties>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.source>17</maven.compiler.source>
