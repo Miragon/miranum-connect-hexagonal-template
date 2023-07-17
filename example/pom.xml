@@ -15,6 +15,7 @@
     <modules>
         <module>example-core</module>
         <module>example-camunda7</module>
+        <module>example-camunda8</module>
     </modules>
 
 </project>
