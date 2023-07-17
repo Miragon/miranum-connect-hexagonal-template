@@ -6,9 +6,11 @@ import io.miragon.example.application.port.in.dosomething.DoSomethingUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 
 public class DoSomethingServiceTest {
 
+    @InjectMocks
     private DoSomethingUseCase doSomethingService;
 
     @BeforeEach

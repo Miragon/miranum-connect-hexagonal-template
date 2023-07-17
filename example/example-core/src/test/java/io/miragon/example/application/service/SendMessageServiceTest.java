@@ -9,11 +9,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 
 public class SendMessageServiceTest {
+
 
     private SendMessageUseCase sendMessageService;
 
@@ -47,7 +50,7 @@ public class SendMessageServiceTest {
         String correlationKey = "my-correlation-key";
         Mockito.doThrow(MessageCorrelationException.class).when(sendMessagePort).sendMessage(Mockito.any());
         assertThrows(MessageCorrelationException.class, () ->
-                sendMessageService.sendMessage(new SendMessageCommand(message, correlationKey, null)));
+                sendMessageService.sendMessage(new SendMessageCommand(message, correlationKey, Map.of())));
         verify(sendMessagePort).sendMessage(sendMessageOutCommandArgumentCaptor.capture());
         SendMessageOutCommand capturedCommand = sendMessageOutCommandArgumentCaptor.getValue();
         assertEquals(message, capturedCommand.getMessageName());
