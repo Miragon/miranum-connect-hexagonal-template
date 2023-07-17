@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>example-core</artifactId>
+    <name>example-core</name>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>io.miragon</groupId>
+        <artifactId>example</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- MIRANUM API DEPENDENCIES -->
+        <dependency>
+            <groupId>io.miragon.miranum</groupId>
+            <artifactId>worker-api</artifactId>
+            <version>${miranum.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.miragon.miranum</groupId>
+            <artifactId>process-api</artifactId>
+            <version>${miranum.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.miragon.miranum</groupId>
+            <artifactId>message-api</artifactId>
+            <version>${miranum.version}</version>
+        </dependency>
+        <!-- MIRANUM API DEPENDENCIES -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>

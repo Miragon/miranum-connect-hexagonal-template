@@ -1,0 +1,15 @@
+# Camunda Platform 8
+# local configuration:
+zeebe.client:
+  broker:
+    gateway-address: localhost:26500
+  security:
+    plaintext: true
+
+# SaaS configuration:
+#zeebe.client:
+#  cloud:
+#  region: bru-2
+#  clusterId:
+#  clientId:
+#  clientSecret:

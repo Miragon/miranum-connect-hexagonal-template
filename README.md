@@ -1,20 +1,30 @@
-# Miranum Connect Basic Template
+# Miranum Connect Hexagonal Template
 
-Simplified, beginner-friendly GitHub template for initiating new projects with Miranum. This template is focused on the key features of Miranum Connect - Worker creation, Message correlation, and Process start.
+GitHub template for initiating new projects with Miranum Connect, following the Hexagonal Architecture approach.
+This template builds upon the Miranum Connect Basic Template and incorporates the recommended hexagonal architecture
+design pattern.
+
+The Hexagonal Architecture promotes a modular and flexible structure, enabling better separation of concerns and
+improved testability. It emphasizes the core domain logic, with ports and adapters facilitating interactions with
+external systems.
+
+For a detailed introduction to the Hexagonal Architecture and its advantages compared to the traditional layered
+approach, refer to the [Miranum Documentation](https://miranum.com/docs/guides/best-practices/hexagonal-architecture).
 
 ## Features
 
-This template provides the following features:
+This template inherits the key features of the Miranum Connect Basic Template and adds the following:
 
+- **Hexagonal Architecture**: Implements the hexagonal architecture design pattern for better modularity and testability.
 - **Worker Creation**: Implement the `doSomething` method in the `MyWorker` class to perform actions on received commands.
 - **Message Correlation**: Implement the `correlateMessage` method in the `MyMessageCorrelation` class to correlate messages with process instances.
 - **Process Start**: Implement the `startProcess` method in the `MyProcessStart` class to initiate a process instance.
 
 ## Prerequisites
 
-Before using this template, make sure you have a running instance of Camunda Platform 7 or Camunda Platform 8 set up.
-This template includes the necessary dependencies for both versions of Camunda. To switch between Camunda Platform 7
-and Camunda Platform 8, you can update the application.yaml file as described below.
+To run the engine-specific applications (`example-camunda7` and `example-camunda8`), you need to have a running
+instance of Camunda Platform 7 or Camunda Platform 8 set up. This template includes the necessary dependencies for both
+versions of Camunda.
 
 ## Getting Started
 
@@ -22,11 +32,13 @@ To use this template, follow these steps:
 
 1. Clone or download this repository to your local machine.
 2. Update the necessary resources to match the name and description of your project:
-    - [README](./README.md) (title, description)
-    - [POM](./pom.xml) (artifact name, id, description)
-    - [Worker](src/main/java/io/miragon/example/MyWorker.java) (rename, implement)
-    - [Message Correlation](src/main/java/io/miragon/example/MyMessageCorrelation.java) (rename, implement)
-    - [Process Start](src/main/java/io/miragon/example/MyProcessStart.java) (rename, implement)
+   - [README](./README.md) (title, description)
+   - [POM](./pom.xml) (artifact name, id, description)
+   - [Application Core](example/example-core/src/main/java/io/miragon/example/application) (implement)
+      - [Worker](example/example-core/src/main/java/io/miragon/example/adapter/in/miranum/MiranumWorkerAdapter.java)
+      - [Message Correlation](example/example-core/src/main/java/io/miragon/example/adapter/out/miranum/MiranumMessageAdapter.java)
+      - [Process Start](example/example-core/src/main/java/io/miragon/example/adapter/out/miranum/MiranumInitiateProcessStartAdapter.java)
+   - [Engine-specific Applications](example/example-camunda7) (rename)
 3. Ensure that you have a running instance of Camunda Platform 7 or Camunda Platform 8.
 4. Build the project using the following command:
 
@@ -36,22 +48,16 @@ To use this template, follow these steps:
 
 5. Run the project by executing the generated JAR file.
 6. Interact with the project's features, such as creating workers, correlating messages, and starting processes.
- 
+
 ## Run Tests
+
 To run the tests for this project, execute the following command:
 
 ```bash
 mvn clean test
 ```
+
 This command will execute all the unit tests in the project and provide the test results.
-
-
-## Configuration
-
-The project's configuration is defined in the `application.yaml` file. By default, the configuration is set up for
-Camunda Platform 7. If you want to switch to Camunda Platform 8, you can uncomment the relevant properties in the
-`application.yaml` file and comment out the Camunda Platform 7 configuration. 
-Additionally, you have to uncomment the Miranum Connect dependency for Camunda Platform 8 in the `pom.xml` file.
 
 ## Documentation
 
