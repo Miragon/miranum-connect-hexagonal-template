@@ -24,6 +24,10 @@ public class InitiateProcessStartServiceTest {
     @Captor
     private ArgumentCaptor<InitiateProcessStartOutCommand> outCommandCaptor;
 
+    public InitiateProcessStartServiceTest() {
+        new InitiateProcessStartService(initiateProcessStartPort);
+    }
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);

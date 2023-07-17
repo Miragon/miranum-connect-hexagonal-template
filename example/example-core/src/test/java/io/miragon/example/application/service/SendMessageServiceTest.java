@@ -26,6 +26,11 @@ public class SendMessageServiceTest {
     @Captor
     private ArgumentCaptor<SendMessageOutCommand> sendMessageOutCommandArgumentCaptor;
 
+    public SendMessageServiceTest() {
+        MockitoAnnotations.openMocks(this);
+        sendMessageService = new SendMessageService(sendMessagePort);
+    }
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
