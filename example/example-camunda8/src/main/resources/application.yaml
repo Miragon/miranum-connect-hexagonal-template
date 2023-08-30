@@ -2,7 +2,7 @@
 # local configuration:
 zeebe.client:
   broker:
-    gateway-address: localhost:26500
+    gateway-address: ${CAMUNDA_BASE_URL:localhost:26500}
   security:
     plaintext: true
 
