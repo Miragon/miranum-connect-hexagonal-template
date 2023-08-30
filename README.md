@@ -47,6 +47,11 @@ To use this template, follow these steps:
    ```
 
 5. Run the project by executing the generated JAR file.
+
+   ```bash
+   java -jar example/example-camunda?/target/*.jar
+   ```
+   
 6. Interact with the project's features, such as creating workers, correlating messages, and starting processes.
 
 ## Run Tests
