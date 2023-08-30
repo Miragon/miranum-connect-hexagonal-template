@@ -1,0 +1,55 @@
+# Use this only in dev environments. It's not intended for production usage.
+version: '3.9'
+services:
+
+  # Miranum Connect needs a running Workflow Engine
+  # Please configure the service to your needs
+  engine:
+    # image:
+    # build:
+    # environment:
+    networks:
+      - internal
+    # links:
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  # Example Camunda 7
+  example-camunda7:
+    container_name: example-camunda7
+    build:
+      context: ../example/example-camunda7
+    environment:
+      CAMUNDA_BASE_URL: http://engine:8080/engine-rest
+    networks:
+      - internal
+    links:
+      - engine
+    depends_on:
+      engine:
+        condition: service_started
+    profiles:
+      - camunda7
+    restart: unless-stopped
+
+  # Example Camunda 8
+  example-camunda8:
+    container_name: example-camunda8
+    build:
+      context: ../example/example-camunda8
+    environment:
+      CAMUNDA_BASE_URL: http://engine:8080/engine-rest
+    networks:
+      - internal
+    links:
+      - engine
+    depends_on:
+      engine:
+        condition: service_started
+    profiles:
+      - camunda8
+    restart: unless-stopped
+
+networks:
+  internal:
